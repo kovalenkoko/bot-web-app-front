@@ -10,15 +10,19 @@ const ItemDetailsPage = () => {
 
   const [item] = useFetch(`${process.env.REACT_APP_BASE_URL}items/${itemId}`);
 
-  const backToMarketplaceHandler = () => {
+  const backToMarketHandler = () => {
     navigate("/");
   };
+  const buyItemHandler = () => {
+    navigate(`/order/${itemId}`);
+  };
+
   return (
     <>
       {item ? (
         <>
           <div className="item_details_container">
-            <button className="back_button" onClick={backToMarketplaceHandler}>
+            <button className="back_button" onClick={backToMarketHandler}>
               Back to marketplace
             </button>
             <div className="item_details_image_container">
@@ -29,7 +33,9 @@ const ItemDetailsPage = () => {
             </h4>
             <div className="item_description">{item.description}</div>
             <div className="buy_item_button_container">
-              <button className="buy_item_button">Buy now</button>
+              <button className="buy_item_button" onClick={buyItemHandler}>
+                Buy now
+              </button>
             </div>
           </div>
         </>

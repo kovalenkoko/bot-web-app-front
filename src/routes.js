@@ -1,5 +1,6 @@
 import ItemDetailsPage from "./pages/ItemDetails/ItemDetailsPage";
 import MarketPage from "./pages/Market/MarketPage";
+import OrderPage from "./pages/Order/OrderPage";
 
 export const ROUTES = [
   {
@@ -9,6 +10,10 @@ export const ROUTES = [
   {
     path: "/item-details/:id",
     element: <ItemDetailsPage />,
+  },
+  {
+    path: "/order/:id",
+    element: <OrderPage />,
   },
   {
     path: "*",
