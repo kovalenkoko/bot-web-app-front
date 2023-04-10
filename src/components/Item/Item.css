@@ -1,0 +1,48 @@
+:root {
+  --primary-color: #e0c521;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 150px;
+  height: 200px;
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem 0.3rem;
+  margin: 13px 10px;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.item_title {
+  font-weight: 400;
+  text-align: center;
+}
+
+.item_title .item_price {
+  font-weight: bold;
+}
+
+.image_container {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.image_container img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.item_price {
+  text-align: center;
+  display: inline-block;
+}

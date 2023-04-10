@@ -1,0 +1,55 @@
+.horizontal_line {
+  border-top: 1px solid #ffffff;
+  margin: 50px 0;
+}
+.order_form_title {
+  max-width: fit-content;
+  margin: 40px auto;
+}
+.order_form {
+  width: 400px;
+  margin: 0 auto;
+}
+.order_form label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.order_form input[type="text"],
+.order_form input[type="tel"] {
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.order_form input[type="text"]:focus,
+.order_form input[type="tel"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+  outline: none;
+}
+
+.submit_order_button_container {
+  text-align: center;
+}
+
+.order_submit {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 16px;
+}
+
+.order_submit:hover {
+  background-color: #0062cc;
+}
