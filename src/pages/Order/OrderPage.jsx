@@ -1,12 +1,15 @@
 import { useState } from "react";
 import "./OrderPage.css";
 import useFetch from "../../hooks/useFetch";
+import { useTelegram } from "../../hooks/useTelegram";
 import { useParams } from "react-router";
 
 const OrderPage = () => {
   const params = useParams();
   const itemId = params.id;
 
+  const { tg, queryId } = useTelegram();
+  console.log(queryId);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [telephone, setTelephone] = useState("");
@@ -18,18 +21,41 @@ const OrderPage = () => {
 
   const [item] = useFetch(`${process.env.REACT_APP_BASE_URL}items/${itemId}`);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({
+
+    const formData = {
+      itemId: item._id,
+      itemSize: "XL",
       firstName,
       lastName,
       telephone,
-      country,
-      city,
-      street,
-      house,
-      flat,
+      shippingAddress: `${country}, ${city}, ${street} ${house}, ${flat}`,
+      queryId,
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    console.log("Form data submitted successfully:", formData);
+    tg.sendData(JSON.stringify(formData));
+    setFirstName("");
+    setLastName("");
+    setTelephone("");
+    setCountry("");
+    setCity("");
+    setStreet("");
+    setHouse("");
+    setFlat("");
   };
 
   return (

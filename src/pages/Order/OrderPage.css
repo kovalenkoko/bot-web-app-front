@@ -7,7 +7,7 @@
   margin: 40px auto;
 }
 .order_form {
-  width: 400px;
+  width: 300px;
   margin: 0 auto;
 }
 .order_form label {
@@ -47,7 +47,7 @@
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 16px;
+  margin: 20px 0 30px 0;
 }
 
 .order_submit:hover {
