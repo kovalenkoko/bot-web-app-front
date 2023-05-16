@@ -2,12 +2,15 @@ import { useState } from "react";
 import "./OrderPage.css";
 import useFetch from "../../hooks/useFetch";
 import { useTelegram } from "../../hooks/useTelegram";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const OrderPage = () => {
   const params = useParams();
   const itemId = params.id;
 
+  const navigate = useNavigate();
   const { tg, queryId } = useTelegram();
   console.log(queryId);
   const [firstName, setFirstName] = useState("");
@@ -18,6 +21,7 @@ const OrderPage = () => {
   const [street, setStreet] = useState("");
   const [house, setHouse] = useState("");
   const [flat, setFlat] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
 
   const [item] = useFetch(`${process.env.REACT_APP_BASE_URL}items/${itemId}`);
 
@@ -26,7 +30,7 @@ const OrderPage = () => {
 
     const formData = {
       itemId: item._id,
-      itemSize: "XL",
+      itemSize: selectedSize,
       firstName,
       lastName,
       telephone,
@@ -46,16 +50,23 @@ const OrderPage = () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    console.log("Form data submitted successfully:", formData);
+    setTimeout(() => {
+      toast.success("Order created successfully!");
+      setFirstName("");
+      setLastName("");
+      setTelephone("");
+      setCountry("");
+      setCity("");
+      setStreet("");
+      setHouse("");
+      setFlat("");
+      setSelectedSize("");
+    }, 500);
+
     tg.sendData(JSON.stringify(formData));
-    setFirstName("");
-    setLastName("");
-    setTelephone("");
-    setCountry("");
-    setCity("");
-    setStreet("");
-    setHouse("");
-    setFlat("");
+  };
+  const handleSizeSelection = (size) => {
+    setSelectedSize(size);
   };
 
   return (
@@ -70,7 +81,21 @@ const OrderPage = () => {
               {item.name} . <span className="item_price">$ {item.price}</span>
             </h4>
             <div className="item_description">{item.description}</div>
-            <hr class="horizontal_line"></hr>
+            <h4 className="select_title">Select Size:</h4>
+            <div className="button_container">
+              {item.itemSizes.map((size) => (
+                <button
+                  key={size}
+                  className={`button ${
+                    selectedSize === size ? "selected" : ""
+                  }`}
+                  onClick={() => handleSizeSelection(size)}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+            <hr className="horizontal_line"></hr>
           </div>
 
           <h2 className="order_form_title">Order form</h2>
@@ -150,11 +175,16 @@ const OrderPage = () => {
               />
             </label>
             <div className="submit_order_button_container">
-              <button type="submit" className="order_submit">
+              <button
+                disabled={!selectedSize}
+                type="submit"
+                className="order_submit"
+              >
                 Submit Order
               </button>
             </div>
           </form>
+          <ToastContainer />
         </>
       ) : (
         <></>
