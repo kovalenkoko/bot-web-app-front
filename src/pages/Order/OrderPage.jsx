@@ -3,8 +3,8 @@ import "./OrderPage.css";
 import useFetch from "../../hooks/useFetch";
 import { useTelegram } from "../../hooks/useTelegram";
 import { useParams, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 const OrderPage = () => {
   const params = useParams();
@@ -49,18 +49,18 @@ const OrderPage = () => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
-      toast.success("Order created successfully!");
-    }
+      setFirstName("");
+      setLastName("");
+      setTelephone("");
+      setCountry("");
+      setCity("");
+      setStreet("");
+      setHouse("");
+      setFlat("");
+      setSelectedSize("");
 
-    setFirstName("");
-    setLastName("");
-    setTelephone("");
-    setCountry("");
-    setCity("");
-    setStreet("");
-    setHouse("");
-    setFlat("");
-    setSelectedSize("");
+      navigate("/");
+    }
 
     tg.sendData(JSON.stringify(formData));
   };
@@ -183,7 +183,7 @@ const OrderPage = () => {
               </button>
             </div>
           </form>
-          <ToastContainer />
+          {/* <ToastContainer /> */}
         </>
       ) : (
         <></>
