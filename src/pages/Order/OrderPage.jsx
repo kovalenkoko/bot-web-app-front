@@ -48,20 +48,19 @@ const OrderPage = () => {
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      toast.success("Order created successfully!");
     }
 
-    setTimeout(() => {
-      toast.success("Order created successfully!");
-      setFirstName("");
-      setLastName("");
-      setTelephone("");
-      setCountry("");
-      setCity("");
-      setStreet("");
-      setHouse("");
-      setFlat("");
-      setSelectedSize("");
-    }, 500);
+    setFirstName("");
+    setLastName("");
+    setTelephone("");
+    setCountry("");
+    setCity("");
+    setStreet("");
+    setHouse("");
+    setFlat("");
+    setSelectedSize("");
 
     tg.sendData(JSON.stringify(formData));
   };
