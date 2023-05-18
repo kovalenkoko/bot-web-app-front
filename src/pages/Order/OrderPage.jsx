@@ -27,42 +27,42 @@ const OrderPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    navigate("/");
+    // const formData = {
+    //   itemId: item._id,
+    //   itemSize: selectedSize,
+    //   firstName,
+    //   lastName,
+    //   telephone,
+    //   shippingAddress: `${country}, ${city}, ${street} ${house}, ${flat}`,
+    //   queryId,
+    // };
 
-    const formData = {
-      itemId: item._id,
-      itemSize: selectedSize,
-      firstName,
-      lastName,
-      telephone,
-      shippingAddress: `${country}, ${city}, ${street} ${house}, ${flat}`,
-      queryId,
-    };
+    // const response = await fetch(`${process.env.REACT_APP_BASE_URL}orders`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // });
 
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}orders`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    // if (!response.ok) {
+    //   throw new Error(`HTTP error! status: ${response.status}`);
+    // } else {
+    //   setFirstName("");
+    //   setLastName("");
+    //   setTelephone("");
+    //   setCountry("");
+    //   setCity("");
+    //   setStreet("");
+    //   setHouse("");
+    //   setFlat("");
+    //   setSelectedSize("");
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    } else {
-      setFirstName("");
-      setLastName("");
-      setTelephone("");
-      setCountry("");
-      setCity("");
-      setStreet("");
-      setHouse("");
-      setFlat("");
-      setSelectedSize("");
+    //   navigate("/");
+    // }
 
-      navigate("/");
-    }
-
-    tg.sendData(JSON.stringify(formData));
+    // tg.sendData(JSON.stringify(formData));
   };
   const handleSizeSelection = (size) => {
     setSelectedSize(size);
